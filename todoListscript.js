@@ -1,24 +1,32 @@
 document.addEventListener('DOMContentLoaded', function() {
     const inputField = document.querySelector('input[type="text"]');
+    const dueDateInput = document.getElementById('dueDate');
     const addButton = document.getElementById('push');
     const taskContainer = document.getElementById('task');
 
     addButton.addEventListener('click', function() {
         const taskText = inputField.value.trim();
+        const dueDate = dueDateInput.value; // Get the value of the due date input field
         if (taskText !== '') {
-            const taskElement = createTaskElement(taskText);
+            const taskElement = createTaskElement(taskText, dueDate); // Pass dueDate to createTaskElement
             taskContainer.appendChild(taskElement);
             inputField.value = ''; // Clear input field after adding task
+            dueDateInput.value = ''; // Clear due date input field after adding task
         }
     });
 
-    function createTaskElement(text) {
+    function createTaskElement(text, dueDate) {
         const taskElement = document.createElement('div');
         taskElement.classList.add('task');
 
         const taskText = document.createElement('span');
         taskText.textContent = text;
         taskElement.appendChild(taskText);
+
+        // Create span for due date
+        const dueDateSpan = document.createElement('span');
+        dueDateSpan.textContent = dueDate;
+        taskElement.appendChild(dueDateSpan);
 
         const editButton = document.createElement('button');
         editButton.textContent = 'Edit';
