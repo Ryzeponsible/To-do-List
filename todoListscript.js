@@ -20,6 +20,18 @@ document.addEventListener('DOMContentLoaded', function() {
         taskText.textContent = text;
         taskElement.appendChild(taskText);
 
+        const editButton = document.createElement('button');
+        editButton.textContent = 'Edit';
+        editButton.classList.add('edit-btn');
+        editButton.addEventListener('click', function() {
+            const newText = prompt('Edit task:', taskText.textContent);
+            if (newText !== null && newText.trim() !== '') {
+                taskText.textContent = newText.trim(); // Update task text
+            }
+        });
+        
+        taskElement.appendChild(editButton);
+
         const deleteButton = document.createElement('button');
         deleteButton.textContent = 'Delete';
         deleteButton.classList.add('delete-btn');
